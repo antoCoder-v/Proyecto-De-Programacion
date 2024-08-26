@@ -1,65 +1,65 @@
 package com.example.proyectodeprogramacion;
 
-import javafx.fxml.FXML;
 import javafx.scene.shape.Line;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.geometry.Point2D;
 
-public class Cables{//falta mejorar, se mueve lento el cable
-    private String carga; //lo usaremos para identificar el tipo de carga que lleva el cable
-    private boolean moviendoInicio = false; // Para saber si se está moviendo el extremo inicial
-    private boolean moviendoFin = false; // Para saber si se está moviendo el extremo final
+public class Cables {
+    private Button buttonStart;
+    private Button buttonEnd;
+    private AnchorPane pane;
 
-    @FXML
-    private Line cablecito = new Line();
-
-    /*  lo dejare aqui para dibujar mas cables (aun no funciona)
-    public Cables (double inicioX, double inicioY, double finX, double funY, AnchorPane panel) {
-        cablecito.setStartX(inicioX);
-        cablecito.setStartY(inicioY);
-        cablecito.setEndX(finX);
-        cablecito.setEndY(finY);
-        cablecito.setStrokeWidth(10);
-        panel.getChildren().addAll(cablecito);
-        inicializarControladoresEventos();
-    }*/
-
-    public Cables(Line cable){
-        cablecito = cable;
-        inicializarControladoresEventos();
+    public Cables(AnchorPane pane) {
+        this.pane = pane;
     }
 
-    private void inicializarControladoresEventos() {
-        // Detectar clic en el extremo inicial o final
-        cablecito.setOnMousePressed(e -> {
-            if (estaCerca(cablecito.getStartX(), cablecito.getStartY(), e.getX(), e.getY())) {
-                moviendoInicio = true;
-                moviendoFin = false;
-            } else if (estaCerca(cablecito.getEndX(), cablecito.getEndY(), e.getX(), e.getY())) {
-                moviendoInicio = false;
-                moviendoFin = true;
-            }
-        });
-
-        // Mover el extremo inicial o final según el arrastre del ratón
-        cablecito.setOnMouseDragged(e -> {
-            if (moviendoInicio) {
-                cablecito.setStartX(e.getX());
-                cablecito.setStartY(e.getY());
-            } else if (moviendoFin) {
-                cablecito.setEndX(e.getX());
-                cablecito.setEndY(e.getY());
-            }
-        });
-
-        // Reiniciar las banderas cuando se suelte el ratón
-        cablecito.setOnMouseReleased(e -> {
-            moviendoInicio = false;
-            moviendoFin = false;
-        });
+    // Método para establecer el primer botón
+    public void setButtonStart(Button button) {
+        this.buttonStart = button;
+        buttonStart.setStyle("-fx-background-color: yellow;");  // Marcar botón seleccionado
     }
 
-    // Método auxiliar para detectar si el clic está cerca de un punto
-    private boolean estaCerca(double x1, double y1, double x2, double y2) {
-        return Math.hypot(x1 - x2, y1 - y2) < 10;
+    // Método para establecer el segundo botón y dibujar el cable
+    public void setButtonEndAndDrawCable(Button button) {
+        this.buttonEnd = button;
+
+        // Dibujar el cable solo si ambos botones están configurados
+        if (buttonStart != null && buttonEnd != null) {
+            drawCable();
+
+            // Limpiar las referencias de los botones y restablecer estilos
+            buttonStart.setStyle(null);
+            buttonEnd.setStyle(null);
+            buttonStart = null;
+            buttonEnd = null;
+        }
     }
 
+    public Button getButtonStart() {
+        return buttonStart;
+    }
+
+    public Button getButtonEnd() {
+        return buttonEnd;
+    }
+
+    // Método para dibujar el cable
+    private void drawCable() {
+        // Obtener las posiciones globales de los botones
+        Point2D startPoint = buttonStart.localToScene(buttonStart.getWidth() / 2, buttonStart.getHeight() / 2);
+        Point2D endPoint = buttonEnd.localToScene(buttonEnd.getWidth() / 2, buttonEnd.getHeight() / 2);
+
+        // Convertir las coordenadas de escena a coordenadas de pane
+        Point2D startPaneCoords = pane.sceneToLocal(startPoint);
+        Point2D endPaneCoords = pane.sceneToLocal(endPoint);
+
+        // Crear la línea que representa el cable
+        Line cable = new Line(startPaneCoords.getX(), startPaneCoords.getY(), endPaneCoords.getX(), endPaneCoords.getY());
+        cable.setStrokeWidth(2);
+        cable.setStyle("-fx-stroke: black;");
+
+        // Agregar el cable al pane
+        pane.getChildren().add(cable);
+    }
 }

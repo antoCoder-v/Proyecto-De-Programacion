@@ -207,6 +207,7 @@
         <Button fx:id="mostrarCable" layoutX="133.0" layoutY="33.0" mnemonicParsing="false" text="Cable" />
         <Button id="mostrarLed" fx:id="mostrarLed" layoutX="184.0" layoutY="33.0" mnemonicParsing="false" text="Led" />
         <Button id="mostrarSwitch" fx:id="mostrarSwitch" layoutX="228.0" layoutY="33.0" mnemonicParsing="false" text="Switch" />
+        <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#botonAgregaBateria" text="Bateria" />
         <Label layoutX="26.0" layoutY="208.0" prefHeight="22.0" prefWidth="610.0" text=" 1   2   3   4   5   6   7   8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30" textFill="#00000081">
          <font>
             <Font size="13.0" />
