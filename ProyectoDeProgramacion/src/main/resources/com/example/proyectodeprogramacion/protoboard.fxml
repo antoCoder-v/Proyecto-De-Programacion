@@ -1,240 +1,229 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mostrarCables" prefHeight="669.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectodeprogramacion.Protoboard">
-    <children>
-        <!-- Rectángulo gris para simular la protoboard -->
-        <Rectangle fill="lightgray" height="374.0" layoutX="10.0" layoutY="140.0" stroke="black" strokeWidth="2.0" width="642.0" />
-
-        <!-- GridPane en la parte superior -->
-        <GridPane fx:id="busSuperior" layoutX="63.0" layoutY="162.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: gray;" AnchorPane.topAnchor="162.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-        </GridPane>
-
-        <!-- Otro GridPane dentro del rectángulo gris -->
-        <GridPane fx:id="pistaSuperior" layoutX="23.0" layoutY="227.0" prefHeight="90.0" prefWidth="400.0" style="-fx-background-color: gray;">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-        </GridPane>
-        <Line endX="-178.0" endY="50.0" layoutX="198.0" layoutY="277.0" startX="447.5999755859375" startY="50.0" stroke="black" strokeWidth="10.0" />
-        <Line endX="60.0" endY="60.0" layoutX="-12.0" layoutY="93.0" startX="590.0" startY="60.0" stroke="#2b00ff" strokeWidth="2.0" />
-        <GridPane fx:id="busInferior" layoutX="63.0" layoutY="454.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: gray;">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-        </GridPane>
-        <GridPane fx:id="pistaInferior" layoutX="23.0" layoutY="335.0" prefHeight="90.0" prefWidth="400.0" style="-fx-background-color: gray;">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-        </GridPane>
-        <Line endX="60.0" endY="60.0" layoutX="-12.0" layoutY="149.0" startX="590.0" startY="60.0" stroke="RED" strokeWidth="2.0" />
-        <Line endX="60.0" endY="60.0" layoutX="-12.0" layoutY="386.0" startX="590.0" startY="60.0" stroke="#0900ff" strokeWidth="2.0" />
-        <Line endX="60.0" endY="60.0" layoutX="-12.0" layoutY="441.0" startX="590.0" startY="60.0" stroke="RED" strokeWidth="2.0" />
-        <Label layoutX="565.0" layoutY="150.0" rotate="90.0" text="-" textFill="BLUE">
-            <font>
-                <Font size="34.0" />
-            </font>
-        </Label>
-        <Label layoutX="565.0" layoutY="436.0" rotate="90.0" text="-" textFill="BLUE">
-            <font>
-                <Font size="34.0" />
-            </font>
-        </Label>
-        <Label ellipsisString="" layoutX="565.0" layoutY="182.0" text="+" textFill="#ff2600">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
-        <Label ellipsisString="" layoutX="565.0" layoutY="468.0" text="+" textFill="#ff2600">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
-        <Label layoutX="590.0" layoutY="265.0" rotate="-90.0" text=" a  b  c  d  e f">
-            <font>
-                <Font name="System Bold" size="15.0" />
-            </font>
-        </Label>
-        <Label layoutX="601.0" layoutY="370.0" rotate="-90.0" text="g  h  i  j  k">
-            <font>
-                <Font name="System Bold" size="15.0" />
-            </font>
-        </Label>
-        <Accordion />
-        <Button fx:id="mostrarCable" layoutX="133.0" layoutY="33.0" mnemonicParsing="false" text="Cable" />
-        <Button id="mostrarLed" fx:id="mostrarLed" layoutX="184.0" layoutY="33.0" mnemonicParsing="false" text="Led" />
-        <Button id="mostrarSwitch" fx:id="mostrarSwitch" layoutX="228.0" layoutY="33.0" mnemonicParsing="false" text="Switch" />
-        <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#botonAgregaBateria" text="Bateria" />
-        <Label layoutX="26.0" layoutY="208.0" prefHeight="22.0" prefWidth="610.0" text=" 1   2   3   4   5   6   7   8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30" textFill="#00000081">
+<AnchorPane fx:id="PantallaProtoboard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="391.0" prefWidth="659.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectodeprogramacion.Protoboard">
+   <children>
+      <Rectangle fill="lightgray" height="374.0" layoutX="9.0" layoutY="9.0" stroke="black" strokeWidth="2.0" width="642.0" />
+      <GridPane fx:id="busSuperior" layoutX="80.0" layoutY="22.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: gray;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="pistaSuperior" layoutX="30.0" layoutY="82.0" prefHeight="90.0" prefWidth="400.0" style="-fx-background-color: gray;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Line endX="-178.0" endY="50.0" layoutX="195.0" layoutY="146.0" startX="447.5999755859375" startY="50.0" stroke="black" strokeWidth="5.0" />
+      <Line endX="60.0" endY="60.0" layoutX="5.0" layoutY="-38.0" startX="590.0" startY="60.0" stroke="#2b00ff" strokeWidth="2.0" />
+      <GridPane fx:id="busInferior" layoutX="80.0" layoutY="326.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: gray;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="19.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="pistaInferior" layoutX="30.0" layoutY="219.0" prefHeight="90.0" prefWidth="400.0" style="-fx-background-color: gray;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="20.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Line endX="60.0" endY="60.0" layoutX="5.0" layoutY="3.0" startX="590.0" startY="60.0" stroke="RED" strokeWidth="2.0" />
+      <Line endX="60.0" endY="60.0" layoutX="5.0" layoutY="265.0" startX="590.0" startY="60.0" stroke="#0900ff" strokeWidth="2.0" />
+      <Line endX="60.0" endY="60.0" layoutX="5.0" layoutY="306.0" startX="590.0" startY="60.0" stroke="RED" strokeWidth="2.0" />
+      <Label layoutX="582.0" layoutY="8.0" rotate="-90.0" text="-" textFill="BLUE">
          <font>
-            <Font size="13.0" />
+            <Font size="34.0" />
          </font>
-        </Label>
-      <Label layoutX="18.0" layoutY="425.0" prefHeight="22.0" prefWidth="610.0" text=" 1   2   3   4   5   6   7   8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30" textFill="#00000081">
+      </Label>
+      <Label layoutX="57.0" layoutY="8.0" rotate="-90.0" text="-" textFill="BLUE">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label layoutX="57.0" layoutY="308.0" rotate="-90.0" text="-" textFill="BLUE">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label layoutX="582.0" layoutY="308.0" rotate="-90.0" text="-" textFill="BLUE">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+      <Label ellipsisString="" layoutX="583.0" layoutY="340.0" text="+" textFill="#ff2600">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label ellipsisString="" layoutX="583.0" layoutY="40.0" text="+" textFill="#ff2600">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label ellipsisString="" layoutX="64.0" layoutY="40.0" text="+" textFill="#ff2600">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label ellipsisString="" layoutX="64.0" layoutY="340.0" text="+" textFill="#ff2600">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="597.0" layoutY="254.0" rotate="-90.0" text=" a  b  c  d  e f" textFill="#0000008d">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Pane fx:id="bateria" layoutX="688.0" layoutY="202.0" prefHeight="233.0" prefWidth="200.0">
-         <children>
-            <Rectangle fill="#9c9b9c" height="130.0" layoutX="56.0" layoutY="43.0" stroke="black" strokeWidth="1.5" width="88.0" />
-            <Rectangle fill="#5100ff" height="28.0" layoutX="34.0" layoutY="120.0" stroke="black" strokeWidth="1.5" width="22.0" />
-            <Rectangle fill="#ff2c00" height="28.0" layoutX="34.0" layoutY="71.0" stroke="black" strokeWidth="1.5" width="22.0" />
-            <Label ellipsisString="" layoutX="39.0" layoutY="72.0" text="+" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="39.0" layoutY="109.0" rotate="90.0" text="-" textFill="WHITE">
-               <font>
-                  <Font size="34.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Pane fx:id="mainPane" layoutX="762.0" layoutY="447.0" prefHeight="75.0" prefWidth="70.0" />
-    </children>
+      <Label layoutX="607.0" layoutY="117.0" rotate="-90.0" text="g  h  i  j  k" textFill="#0000008a">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="64.0" prefHeight="22.0" prefWidth="610.0" text=" 1   2   3   4   5   6   7   8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30" textFill="#00000082">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="306.0" prefHeight="22.0" prefWidth="610.0" text=" 1   2   3   4   5   6   7   8  9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30" textFill="#00000081">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

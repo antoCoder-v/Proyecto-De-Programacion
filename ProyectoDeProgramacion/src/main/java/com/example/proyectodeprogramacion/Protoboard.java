@@ -1,17 +1,16 @@
 package com.example.proyectodeprogramacion;
 
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.AnchorPane;
-import java.io.IOException;
-import javafx.scene.Parent;
+import java.io.Serializable;
 
-public class Protoboard {
+import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
+
+public class Protoboard implements Serializable{
 
     @FXML
     private GridPane busSuperior;
@@ -24,20 +23,17 @@ public class Protoboard {
 
     @FXML
     private GridPane pistaInferior;
+    
     @FXML
-    private Button mostrarLed;
-    @FXML
-    private Button mostrarSwitch;
-    @FXML
-    private Button mostrarCable;
-    @FXML
-    private Pane bateria;
-    @FXML
-    private Pane mainPane;
-    @FXML
-    private AnchorPane mostrarCables;
+    private AnchorPane PantallaProtoboard;
+
+    private double offsetX;
+    private double offsetY;
 
     private Cables cableManager;
+    public double[] posicionBotonProtoboard = new double[]{10, 10};
+    private ArchivosDatos archivosDatos = new ArchivosDatos();
+
 
     @FXML
     public void initialize() {
@@ -52,54 +48,56 @@ public class Protoboard {
 
         // Agregar botones a pistaInferior
         agregarBotonesGridPane(pistaInferior);
-        mostrarLed.setOnAction(event -> loadLedInterface());
-        cableManager = new Cables(mostrarCables);
+
+        cableManager = new Cables(PantallaProtoboard);
+
+        // Agregar manejadores de eventos a la protoboard
+        PantallaProtoboard.setOnMousePressed(this::handleMousePressed);
+        PantallaProtoboard.setOnMouseDragged(this::handleMouseDragged);
     }
 
     // Método que recorre un GridPane y añade botones en cada celda
     private void agregarBotonesGridPane(GridPane gridPane) {
-        int rows = gridPane.getRowConstraints().size();
-        int columns = gridPane.getColumnConstraints().size();
+        try{
+            int rows = gridPane.getRowConstraints().size();
+            int columns = gridPane.getColumnConstraints().size();
 
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < columns; col++) {
-                Button button = new Button();
-                //button.setPrefSize(20, 2); // Tamaño del botón, puedes ajustarlo
-                button.setMinSize(15, 15);
-                button.setMaxSize(15, 15);
+            for (int row = 0; row < rows; row++) {
+                for (int col = 0; col < columns; col++) {
+                    Button button = new Button();
+                    //button.setPrefSize(20, 2); // Tamaño del botón, puedes ajustarlo
+                    button.setMinSize(15, 15);
+                    button.setMaxSize(15, 15);
 
-                // Asignar un ID basado en la posición
-                button.setId("Button-" + row + "-" + col);
+                    // Asignar un ID basado en la posición
+                    button.setId("Button-" + row + "-" + col);
 
-                gridPane.add(button, col, row);
-                button.setOnAction(event -> onButtonClicked(button));
+                    gridPane.add(button, col, row);
+                    button.setOnAction(event -> {
+                        try{
+                            onButtonClicked(button);
+                            // Obtener las coordenadas del botonCargaNegativa en la escena
+                            Point2D buttonCoordenada = button.localToScene(button.getWidth() / 2, button.getHeight() / 2);
+                            posicionBotonProtoboard = new double[] { buttonCoordenada.getX(), buttonCoordenada.getY() };
+                            
+                            System.out.println("Posición protoboard: " + posicionBotonProtoboard[0] + ", " + posicionBotonProtoboard[1]);
+                            
+                            Datos datos = new Datos("protoboard", posicionBotonProtoboard);
+                            archivosDatos.guardarDatos(datos, "protoboard.txt");
+                            //archivosDatos.guardarDatos(datos);
+                        }
+                        catch (Exception e) {
+                            System.out.println("Error en: " + e.getMessage());
+                        }
+                        
+                        
+                    });
+                }
             }
+        }catch (Exception e) {
+            System.out.println("Error en: " + e.getMessage());
         }
-    }
-
-    // Método que carga la interfaces de los elemtentos de los botones
-    private void cargarInterfacezElementos(String nombre){
-        try {
-            // Cargamos el archivo nombre.fxml
-            Parent elemento = FXMLLoader.load(getClass().getResource(nombre));
-            elemento.setLayoutX(47);
-            elemento.setLayoutY(53);
-            mostrarCables.getChildren().add(elemento);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    private void loadLedInterface() {
-        try {
-            // Cargamos el archivo Led.fxml
-            Parent ledUI = FXMLLoader.load(getClass().getResource("Led.fxml"));
-            // Agregamos el contenido del Led.fxml al mainPane
-            mainPane.getChildren().clear();  // Limpiamos el panel antes de cargar la interfaz del LED
-            mainPane.getChildren().add(ledUI); // Añadimos la interfaz del LED
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
     }
 
     // Método para manejar cuando se hace clic en un botón de la protoboard
@@ -113,13 +111,16 @@ public class Protoboard {
         }
     }
 
-    @FXML
-    private void botonAgregaBateria(ActionEvent event) {
-        cargarInterfacezElementos("Bateria.fxml");
+    private void handleMousePressed(MouseEvent event) {
+        // Almacenar la posición inicial del mouse
+        offsetX = event.getSceneX() - PantallaProtoboard.getLayoutX();
+        offsetY = event.getSceneY() - PantallaProtoboard.getLayoutY();
     }
+
+    private void handleMouseDragged(MouseEvent event) {
+        // Mover el pane según el movimiento del mouse
+        PantallaProtoboard.setLayoutX(event.getSceneX() - offsetX);
+        PantallaProtoboard.setLayoutY(event.getSceneY() - offsetY);
+    }
+
 }
-
-
-
-
-
