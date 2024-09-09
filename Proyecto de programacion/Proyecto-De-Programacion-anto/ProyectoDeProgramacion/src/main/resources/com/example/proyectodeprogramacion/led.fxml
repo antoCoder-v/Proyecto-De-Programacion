@@ -5,7 +5,7 @@
 <?import javafx.scene.shape.Rectangle?>
 
 
-<AnchorPane prefHeight="128.0" prefWidth="110.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectodeprogramacion.Led">
+<AnchorPane prefHeight="128.0" prefWidth="110.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectodeprogramacion.ControladorLed">
    <children>
       <Pane layoutX="20.0" layoutY="16.0" prefHeight="126.0" prefWidth="121.0">
          <children>

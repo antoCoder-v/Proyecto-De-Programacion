@@ -1,4 +1,4 @@
 package com.example.proyectodeprogramacion;
 
-public class Switch {
+public class ControladorLed {
 }
