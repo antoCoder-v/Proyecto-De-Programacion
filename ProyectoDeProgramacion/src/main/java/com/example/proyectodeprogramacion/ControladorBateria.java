@@ -25,13 +25,11 @@ public class ControladorBateria {
     private double offsetY;
 
     //variables de otras clases
-    private ControladorProtoboard protoboard;
     private Cables cableManager;
 
     //variables para almacenar variables externas de la clase
-    private Button dibujarCable;
     private Button botonPresionado;
-    private AnchorPane paneProtoboard;
+    private AnchorPane pantalla;
     private GridPane busSuperior;
     private GridPane pistaSuperior;
     private GridPane busInferior;
@@ -40,28 +38,24 @@ public class ControladorBateria {
     //constructores de la clase
     public ControladorBateria() {}
 
-    public ControladorBateria(ControladorProtoboard controladorProtoboard) {
-        this.protoboard = controladorProtoboard;
-    }
 
     //metodo que recibe las variables externas de la clase
-    public void recibirDato(Button boton, Button dibujarCable, AnchorPane paneProtoboard, GridPane busSuperior, GridPane pistaSuperior, GridPane busInferior, GridPane pistaInferior) {
+    public void recibirDato(Button boton, AnchorPane pantalla, GridPane busSuperior, GridPane pistaSuperior, GridPane busInferior, GridPane pistaInferior) {
         this.botonPresionado = boton;
-        this.dibujarCable = dibujarCable;
-        this.paneProtoboard = paneProtoboard;
+        this.pantalla = pantalla;
         this.busSuperior = busSuperior;
         this.pistaSuperior = pistaSuperior;
         this.busInferior = busInferior;
         this.pistaInferior = pistaInferior;
     }
 
-    public void setProtoboard(ControladorProtoboard protoboard) {
-        this.protoboard = protoboard;
+    public void setPantallaPrincipal(AnchorPane pantalla) {
+        this.pantalla = pantalla;
     }
 
     @FXML
     public void initialize() {
-        protoboard = new ControladorProtoboard();
+        //protoboard = new ControladorProtoboard();
 
         //Manejamos los movimientos del mouse en el paneBateria
         paneBateria.setOnMousePressed(this::handleMousePressed);
@@ -74,7 +68,7 @@ public class ControladorBateria {
         botonCargaNegativa.setStyle("-fx-background-color: red;");
         mostrarVentanaMensaje("Ha seleccionado carga negativa, para colocar cable aprete el boton.");
         //botonPositivo.setCarga("negativa");
-        cableManager = new Cables(paneProtoboard, dibujarCable, busSuperior, pistaSuperior, busInferior, pistaInferior);
+        cableManager = new Cables(pantalla, busSuperior, pistaSuperior, busInferior, pistaInferior);
         //cableManager.setTipoCarga("negativa");
         cableManager.setButtonStart(botonCargaNegativa);
         cableManager.setButtonEndAndDrawCable(botonPresionado);
@@ -85,9 +79,7 @@ public class ControladorBateria {
         //cambiamos el boton a color verde
         botonCargaPositiva.setStyle("-fx-background-color: green;");
         mostrarVentanaMensaje("Ha seleccionado carga positiva, para colocar cable aprete el boton.");
-        //botonPositivo.setCarga("positiva");
-        cableManager = new Cables(paneProtoboard, dibujarCable,busSuperior, pistaSuperior, busInferior, pistaInferior);
-        //cableManager.setTipoCarga("positiva");
+        cableManager = new Cables(pantalla,busSuperior, pistaSuperior, busInferior, pistaInferior);
         cableManager.setButtonStart(botonCargaPositiva);
         cableManager.setButtonEndAndDrawCable(botonPresionado);
     }

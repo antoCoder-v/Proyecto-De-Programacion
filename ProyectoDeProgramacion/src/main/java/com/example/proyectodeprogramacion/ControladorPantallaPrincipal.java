@@ -1,16 +1,17 @@
 package com.example.proyectodeprogramacion;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import java.io.IOException;
-import java.io.Serializable;
 
-import javafx.scene.shape.Line;
-
-public class ControladorPantallaPrincipal implements Serializable{
+public class ControladorPantallaPrincipal {
 
     @FXML
     private Button mostrarLed;
@@ -22,78 +23,88 @@ public class ControladorPantallaPrincipal implements Serializable{
     private Button mostrarCable;
 
     @FXML
-    private Button botonAgregaBateria;
-    
-    @FXML
-    private Button botonProtoboard;
+    private Button agregarProtoboard;
 
     @FXML
     private AnchorPane pantallaPrincipal;
 
-    public double[] posicionBotonProtoboard = new double[]{10, 10};
-    public double[] posicionBotonNegativo = new double[]{0, 0};
+    //variable para controlar si aparecio la bateria
+    private boolean aparecioBateria = false;
 
-    private Line lineaConexion;
+    private Button botonPresionado;
 
-    private ArchivosDatos archivosDatos = new ArchivosDatos();
+    //Controladores de las clases
+    ControladorBateria controladorBateria;
+    ControladorProtoboard protoboard;
+
+    public AnchorPane getPantallaPrincipal() {
+        return pantallaPrincipal;
+    }
+
+    public Button getBotonPresionado() {
+        return botonPresionado;
+    }
+
 
     @FXML
     public void initialize() {
-        
-        mostrarLed.setOnAction(event -> cargarInterfacezElementos("led.fxml"));
-
-        botonAgregaBateria.setOnAction(event -> {
-            cargarInterfacezElementos("Bateria.fxml");
-            System.out.println("posicion carga negativa " + posicionBotonNegativo[0] + posicionBotonNegativo[1]);  
-        });
-        botonProtoboard.setOnAction(event -> {
-            cargarInterfacezElementos("protoboard.fxml");
-        });
-
-        mostrarCable.setOnAction(event -> {
-            dibujaCable();
-            System.out.println("posicion carga negativa " + posicionBotonNegativo[0] + posicionBotonNegativo[1]); 
-            System.out.println("posicion protoboard " + posicionBotonProtoboard[0] + posicionBotonProtoboard[1]);
-        });
     }
 
+    @FXML
+    private void botonAgregaBateria(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void botonAgregaSwitch(ActionEvent event) {
+        cargarInterfacezElementos("switch.fxml");
+    }
+
+    @FXML
+    private void botonAgregaLed(ActionEvent event) {
+        cargarInterfacezElementos("led.fxml");
+    }
+
+    @FXML
+    private void agregarProtoboard(ActionEvent event) {
+        System.out.println("ENTRA A BOTON PROTOBOARD------!\n\n\n");
+        cargarInterfacezElementos("protoboard.fxml");
+    }
+    
     // Método que carga la interfaces de los elemtentos de los botones
     private void cargarInterfacezElementos(String nombre){
         try {
-            // Cargamos el archivo nombre.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource(nombre));
+            // Carga el archivo FXML
             Parent elemento = loader.load();
-            
-            elemento.setLayoutX(100);   
-            elemento.setLayoutY(100);   
+            // Cargamos el archivo nombre.fxml
+            if (nombre.equals("switch.fxml")) {
+                ControladorSwitch switchController = loader.getController();
+                //switchController.setProtoboard(this); // Pasar la instancia de Protoboard
+            }else if(nombre.equals("protoboard.fxml")){ //NO SE PORQUE NO ENTRA ACA T-T
+                System.out.println("ENTRA A PROTOBOARD Y PASA DATOS------!\n\n\n");
+                ControladorProtoboard controlProtoboard = loader.getController();
+                System.out.println(pantallaPrincipal); // Debería imprimir una referencia válida y no null
+                controlProtoboard.setPantallaPrincipal(this);
+            }
+            elemento.setLayoutX(47);
+            elemento.setLayoutY(53);
             pantallaPrincipal.getChildren().add(elemento);
 
         } catch (IOException e) {
-            e.printStackTrace();
+             // Captura el mensaje de la excepción
+            String errorMessage = e.getMessage();
+            
+            // Captura la pila de llamadas
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String stackTrace = sw.toString();
+            
+            // Imprime o registra la información
+            System.err.println("Error: " + errorMessage);
+            System.err.println("Stack Trace: " + stackTrace);
         }
     }
-
-    private void dibujaCable(){
-        try{
-            // Crear la línea
-            lineaConexion = new Line();
-
-            posicionBotonNegativo = archivosDatos.leerDatos("bateria", "bateria.txt");
-            posicionBotonProtoboard = archivosDatos.leerDatos("protoboard", "protoboard.txt");
-
-
-            // Establecer las coordenadas de la línea
-            lineaConexion.setStartX(posicionBotonProtoboard[0]);
-            lineaConexion.setStartY(posicionBotonProtoboard[1]);
-            lineaConexion.setEndX(posicionBotonNegativo[0]);
-            lineaConexion.setEndY(posicionBotonNegativo[1]);
-
-            // Añadir la línea al AnchorPane principal
-            pantallaPrincipal.getChildren().add(lineaConexion);
-        }catch (Exception e) {
-            System.out.println("Error en: " + e.getMessage());
-        }
-        
-    }
-
+    
 }
