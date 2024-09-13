@@ -84,7 +84,7 @@ public class ControladorProtoboard {
     @FXML
     public void initialize() {
 
-        pantalla = VairablesGlobales.pantallaPrincipal;
+        pantalla = VariablesGlobales.pantallaPrincipal;
 
         // Verifica si pantalla es null
         if (pantalla == null) {

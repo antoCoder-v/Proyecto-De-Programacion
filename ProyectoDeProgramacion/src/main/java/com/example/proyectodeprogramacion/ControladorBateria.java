@@ -61,7 +61,7 @@ public class ControladorBateria {
 
     @FXML
     public void initialize() {
-        pantalla = VairablesGlobales.pantallaPrincipal;
+        pantalla = VariablesGlobales.pantallaPrincipal;
         //protoboard = new ControladorProtoboard();
 
         //Manejamos los movimientos del mouse en el paneBateria
@@ -74,9 +74,7 @@ public class ControladorBateria {
     public void botonCargaNegativa(ActionEvent event) {
         botonCargaNegativa.setStyle("-fx-background-color: red;");
         mostrarVentanaMensaje("Ha seleccionado carga negativa, para colocar cable aprete el boton.");
-        //botonPositivo.setCarga("negativa");
-        //cableManager = new Cables(pantalla, busSuperior, pistaSuperior, busInferior, pistaInferior);
-        //cableManager.setTipoCarga("negativa");
+        cableManager = new Cables(pantalla, busSuperior, pistaSuperior, busInferior, pistaInferior);
         cableManager.setButtonStart(botonCargaNegativa);
         cableManager.setButtonEndAndDrawCable(botonPresionado);
     }
@@ -86,7 +84,7 @@ public class ControladorBateria {
         //cambiamos el boton a color verde
         botonCargaPositiva.setStyle("-fx-background-color: green;");
         mostrarVentanaMensaje("Ha seleccionado carga positiva, para colocar cable aprete el boton.");
-        //cableManager = new Cables(pantalla,busSuperior, pistaSuperior, busInferior, pistaInferior);
+        cableManager = new Cables(pantalla,busSuperior, pistaSuperior, busInferior, pistaInferior);
         cableManager.setButtonStart(botonCargaPositiva);
         cableManager.setButtonEndAndDrawCable(botonPresionado);
     }

@@ -63,7 +63,7 @@ public class ControladorPantallaPrincipal {
     @FXML
     public void initialize() {
         // Inicializar la variable estática
-        VairablesGlobales.pantallaPrincipal = pantallaPrincipal;
+        VariablesGlobales.pantallaPrincipal = pantallaPrincipal;
 
         // Verifica si pantallaPrincipal es null
         if (pantallaPrincipal == null) {
