@@ -9,21 +9,21 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-
+import javafx.geometry.Bounds;
 
 public class ControladorSwitch {
 
     @FXML
-    private AnchorPane switchPane; // Asegúrate de que el fx:id de tu AnchorPane en el archivo FXML coincida
+    private AnchorPane switchPane; // Contiene todo el contenido del switch, incluyendo el Rectangle y los Circles
 
     @FXML
     private Pane mainPane; // Asegúrate de que el fx:id de tu Pane en el archivo FXML coincida
 
     @FXML
-    private Rectangle rectangle; // Asegúrate de que el fx:id de tu Rectangle en el archivo FXML coincida
+    private Rectangle rectangle; // Rectángulo dentro del switchPane
 
     @FXML
-    private Circle circleCenter; // Asegúrate de que el fx:id de tu Circle en el archivo FXML coincida
+    private Circle circleCenter; // Círculo dentro del switchPane
 
     @FXML
     private Circle circle1;
@@ -33,21 +33,23 @@ public class ControladorSwitch {
     private Circle circle3;
     @FXML
     private Circle circle4;
+
     private double offsetX;
     private double offsetY;
-    
     private ControladorProtoboard protoboard;
+    @FXML
+    private Button encender;
 
     public ControladorSwitch() {
     }
 
     @FXML
     public void initialize() {
-        // Configura los eventos de arrastre para el rectángulo (o el Pane, si prefieres)
-        rectangle.setOnMousePressed(this::handleMousePressed);
-        rectangle.setOnMouseDragged(this::handleMouseDragged);
+        // Configura los eventos de arrastre para el switchPane
+        switchPane.setOnMousePressed(this::handleMousePressed);
+        switchPane.setOnMouseDragged(this::handleMouseDragged);
 
-        // Configura los eventos de arrastre para cada círculo
+        // Configura los eventos de arrastre para cada círculo (opcional si se necesita mover individualmente)
         circle1.setOnMousePressed(this::handleMousePressed);
         circle1.setOnMouseDragged(this::handleMouseDragged);
 
@@ -62,8 +64,11 @@ public class ControladorSwitch {
 
         circleCenter.setOnMousePressed(this::handleMousePressed);
         circleCenter.setOnMouseDragged(this::handleMouseDragged);
+
+        // Configura el evento al presionar el botón "Encender"
+        encender.setOnAction(event -> verificarPosicion(protoboard));
     }
-    
+
     public void setProtoboard(ControladorProtoboard protoboard) {
         this.protoboard = protoboard;
     }
@@ -78,7 +83,7 @@ public class ControladorSwitch {
         switchPane.setLayoutY(event.getSceneY() - offsetY);
 
         // Llama a verificarPosicion después de mover el switch para verificar su posición
-        verificarPosicion(protoboard);
+        //verificarPosicion(protoboard);
     }
 
     // Método para verificar sobre qué botones ha quedado el switch
@@ -103,17 +108,25 @@ public class ControladorSwitch {
             if (node instanceof Button) {
                 Button button = (Button) node;
 
-                double buttonX = button.getLayoutX();
-                double buttonY = button.getLayoutY();
-                double buttonWidth = button.getWidth();
-                double buttonHeight = button.getHeight();
+                // Obtener los límites en escena de ambos elementos para una comparación precisa
+                Bounds buttonBounds = button.localToScene(button.getBoundsInLocal());
+                Bounds switchBounds = switchPane.localToScene(switchPane.getBoundsInLocal());
 
-                if (switchX < buttonX + buttonWidth && switchX + switchPane.getPrefWidth() > buttonX &&
-                        switchY < buttonY + buttonHeight && switchY + switchPane.getPrefHeight() > buttonY) {
+                // Verifica si los límites del switch intersectan con los límites del botón
+                if (switchBounds.intersects(buttonBounds)) {
                     System.out.println("Switch sobre: " + button.getId());
+                    System.out.println("----------------------------------");
                 }
             }
         }
     }
-
 }
+
+
+
+
+
+
+
+
+
