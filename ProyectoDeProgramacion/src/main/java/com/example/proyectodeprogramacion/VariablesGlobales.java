@@ -8,5 +8,4 @@ public class VariablesGlobales {
     public static Boolean aparecioBateria;
     public static Button botonPresionadoBateria;
     public static ControladorProtoboard controladorProtoboard;
-
 }

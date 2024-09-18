@@ -27,24 +27,31 @@ public class ControladorSwitch {
 
     @FXML
     private Circle circle1;
+
     @FXML
     private Circle circle2;
+
     @FXML
     private Circle circle3;
+
     @FXML
     private Circle circle4;
+
+    @FXML
+    private Button encender;
 
     private double offsetX;
     private double offsetY;
     private ControladorProtoboard protoboard;
-    @FXML
-    private Button encender;
+    
 
     public ControladorSwitch() {
     }
 
     @FXML
     public void initialize() {
+        protoboard = VariablesGlobales.controladorProtoboard;
+
         // Configura los eventos de arrastre para el switchPane
         switchPane.setOnMousePressed(this::handleMousePressed);
         switchPane.setOnMouseDragged(this::handleMouseDragged);

@@ -1,12 +1,16 @@
 package com.example.proyectodeprogramacion;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
 import javafx.scene.shape.Circle;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 
 public class ControladorLed {
 
@@ -17,16 +21,19 @@ public class ControladorLed {
     private Circle patita2;  // Vinculado con fx:id="patita2"
 
     @FXML
-    private Pane ledPane;    // Contenedor del LED y las patitas
+    private AnchorPane ledPane;    // Contenedor del LED y las patitas
 
     private double offsetX;  // Diferencia en el eje X durante el arrastre
     private double offsetY;  // Diferencia en el eje Y durante el arrastre
 
     private boolean conectadoProtoboard = false;
+    private ControladorProtoboard protoboard;
 
     // Inicialización del controlador
     @FXML
     public void initialize() {
+        protoboard = VariablesGlobales.controladorProtoboard;
+
         // Inicialización de las patitas (puedes personalizar los estilos o comportamientos)
         patita1.setFill(javafx.scene.paint.Color.DODGERBLUE);
         patita2.setFill(javafx.scene.paint.Color.DODGERBLUE);
@@ -36,6 +43,7 @@ public class ControladorLed {
 
         // Manejo de la interacción de la patita1
         patita1.setOnMouseClicked(event -> {
+            verificarPosicion(); //nos dice en que botones de la protoboard esta el led
             if (conectadoProtoboard) {
                 desconectarDeProtoboard("patita1");
             } else {
@@ -45,12 +53,15 @@ public class ControladorLed {
 
         // Manejo de la interacción de la patita2
         patita2.setOnMouseClicked(event -> {
+            verificarPosicion(); //nos dice en que botones de la protoboard esta el led
             if (conectadoProtoboard) {
                 desconectarDeProtoboard("patita2");
             } else {
                 conectarAProtoboard("patita2");
             }
         });
+
+        
     }
 
     // Método para capturar el punto inicial de arrastre
@@ -96,6 +107,45 @@ public class ControladorLed {
             patita1.setFill(Color.DODGERBLUE);
         } else if (patita.equals("patita2")) {
             patita2.setFill(Color.DODGERBLUE);
+        }
+    }
+
+    // Método para verificar sobre qué botones ha quedado el led
+    public void verificarPosicion() {
+        if (protoboard == null) {
+            System.out.println("Protoboard no está asignado.");
+            return;
+        }
+
+        verificarEnGridPane(protoboard.getBusSuperior());
+        verificarEnGridPane(protoboard.getPistaSuperior());
+        verificarEnGridPane(protoboard.getBusInferior());
+        verificarEnGridPane(protoboard.getPistaInferior());
+    }
+
+     // Método auxiliar para iterar sobre los botones de un GridPane
+    private void verificarEnGridPane(GridPane gridPane) {
+        for (Node node : gridPane.getChildren()) {
+            if (node instanceof Button) {
+                Button button = (Button) node;
+
+                // Obtener los límites en escena de ambos elementos para una comparación precisa
+                Bounds buttonBounds = button.localToScene(button.getBoundsInLocal());
+                Bounds patita1Bounds = patita1.localToScene(patita1.getBoundsInLocal());
+                Bounds patita2Bounds = patita2.localToScene(patita2.getBoundsInLocal());
+
+                // Verifica si los límites del switch intersectan con los límites del botón
+                if (patita1Bounds.intersects(buttonBounds) && patita2Bounds.intersects(buttonBounds)) {
+                    System.out.println("Ambas patitas estan en protoboard, sobre: " + button.getId());
+                    System.out.println("----------------------------------");
+                }else if (patita1Bounds.intersects(buttonBounds)) {
+                    System.out.println("Patita 1 esta en protoboard, sobre: " + button.getId());
+                    System.out.println("----------------------------------");
+                }else if (patita2Bounds.intersects(buttonBounds)) {
+                    System.out.println("Patita 2 esta en protoboard, sobre: " + button.getId());
+                    System.out.println("----------------------------------");  
+                }
+            }
         }
     }
 }

@@ -29,25 +29,11 @@ public class ControladorProtoboard {
 
     //Clases externas
     private Cables cableManager;
-    private ControladorBateria controladorBateria;
 
-    private AnchorPane pantalla;
 
     //variables para almacenar la posición del mouse
     private double offsetX;
     private double offsetY;
-
-    public void setCableManager(Cables cableManager) {
-        this.cableManager = cableManager;
-    }
-
-    public void setPantalla(AnchorPane pantalla) {
-        this.pantalla = pantalla;
-    }
-
-    public AnchorPane getPantalla() {
-        return pantalla;
-    }
 
     public GridPane getBusSuperior() {
         return busSuperior;
@@ -65,14 +51,10 @@ public class ControladorProtoboard {
         return pistaInferior;
     }
 
-    //contructores de la clase
-    public ControladorProtoboard() {}
 
     @FXML
     public void initialize() {
-
-        //Obtenemos las variables globales
-        pantalla = VariablesGlobales.pantallaPrincipal;
+        VariablesGlobales.controladorProtoboard = this;
         
         // Agregar botones a busSuperior
         agregarBotonesGridPane(busSuperior, "busSuperior");
@@ -123,11 +105,11 @@ public class ControladorProtoboard {
     // Método para manejar cuando se hace clic en un botón de la protoboard
     public void onButtonClicked(Button button, String tipo) {
         // Si no hay un botón de inicio configurado, configúralo
-        if(VariablesGlobales.aparecioBateria == true) {
+        if(VariablesGlobales.aparecioBateria == true){ 
             cableManager.setButtonStart(VariablesGlobales.botonPresionadoBateria);
+            cableManager.setButtonEndAndDrawCable(button);
             VariablesGlobales.aparecioBateria = false;
             VariablesGlobales.botonPresionadoBateria = null;
-            System.out.println("Boton presionado bateria");
 
         }else if (cableManager.getButtonStart() == null) {
             cableManager.setButtonStart(button);

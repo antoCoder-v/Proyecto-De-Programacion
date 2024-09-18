@@ -59,14 +59,12 @@ public class Cables {
                 manejoCorriente(buttonStart);
                 manejoCorriente(buttonEnd);
 
-                // Reiniciar los botones para otro uso
+                // Reiniciar las variables temporales para otro uso
                 buttonStart = null;
                 buttonEnd = null;
+                estilo = "";
             }
-        } else {
-            mostrarVentanaMensaje("Para dibujar un cable, primero selecciona un botón de inicio y un botón final.");
         }
-        
     }
 
     public Button getButtonStart() {
@@ -146,13 +144,14 @@ public class Cables {
     private void reconoceCarga(Button boton1, Button boton2){
         String style1 = boton1.getStyle();
         String style2 = boton2.getStyle();
-        if(style1.contains("green") || style2.contains("green")){
+        if(style1.contains("green") && style2.contains("red") || style1.contains("red") && style2.contains("green")){
+            mostrarVentanaMensaje("No se puede conectar distintas cargas de energias");
+        }else if(style1.contains("green") || style2.contains("green")){
             estilo = "-fx-background-color: green; -fx-background-radius: 30;";
         }else if(style1.contains("red") || style2.contains("red")){
             estilo = "-fx-background-color: red; -fx-background-radius: 30;";
+        }else{
+            estilo = "-fx-background-radius: 30;";
         }
     }
-
-
 }
-
