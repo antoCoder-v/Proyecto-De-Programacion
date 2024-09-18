@@ -27,8 +27,9 @@ public class ControladorProtoboard {
     @FXML
     private AnchorPane PantallaProtoboard;
 
+    //Clases externas
     private Cables cableManager;
-    private ControladorPantallaPrincipal pantallaPrincipal;
+    private ControladorBateria controladorBateria;
 
     private AnchorPane pantalla;
 
@@ -42,12 +43,6 @@ public class ControladorProtoboard {
 
     public void setPantalla(AnchorPane pantalla) {
         this.pantalla = pantalla;
-        // Verifica si pantalla es null
-        if (this.pantalla == null) {
-            System.err.println("pantalla es null en setPantalla");
-        } else {
-            System.out.println("pantalla no es null en setPantalla");
-        }
     }
 
     public AnchorPane getPantalla() {
@@ -70,28 +65,14 @@ public class ControladorProtoboard {
         return pistaInferior;
     }
 
-    
     //contructores de la clase
     public ControladorProtoboard() {}
 
-    public ControladorProtoboard(ControladorPantallaPrincipal pantallaPrincipal) {
-        this.pantallaPrincipal = pantallaPrincipal;
-    }
-    
-    public void setPantallaPrincipal(ControladorPantallaPrincipal pantallaPrincipal) {
-            this.pantallaPrincipal = pantallaPrincipal;  // Configura la instancia de pantallaPrincipal
-        }
     @FXML
     public void initialize() {
 
+        //Obtenemos las variables globales
         pantalla = VariablesGlobales.pantallaPrincipal;
-
-        // Verifica si pantalla es null
-        if (pantalla == null) {
-            System.err.println("pantalla es null en initialize");
-        } else {
-            System.out.println("pantalla no es null en initialize");
-        }
         
         // Agregar botones a busSuperior
         agregarBotonesGridPane(busSuperior, "busSuperior");
@@ -109,15 +90,8 @@ public class ControladorProtoboard {
         PantallaProtoboard.setOnMousePressed(this::handleMousePressed);
         PantallaProtoboard.setOnMouseDragged(this::handleMouseDragged);
 
-        //cableManager = new Cables(pantallaPrincipal.getPantallaPrincipal(), busSuperior, pistaSuperior, busInferior, pistaInferior);
-        // Verifica si pantalla es null después de la inicialización
-        if (pantalla == null) {
-            System.err.println("pantalla es null después de la inicialización");
-        } else {
-            System.out.println("pantalla no es null después de la inicialización");
-        }
-        
-        cableManager = new Cables(pantalla, busSuperior, pistaSuperior, busInferior, pistaInferior);
+        //cableManager = new Cables(pantallaPrincipal.getPantallaPrincipal(), busSuperior, pistaSuperior, busInferior, pistaInferior);    
+        cableManager = new Cables(busSuperior, pistaSuperior, busInferior, pistaInferior);
     }
     
     // Método que recorre un GridPane y añade botones en cada celda
@@ -135,13 +109,9 @@ public class ControladorProtoboard {
 
                 // Asignar un ID basado en la posición
                 button.setId("Button -"+ tipo+ "-"+ row + "-" + col);
+
                 //manejamos el clic a la protoboard
                 button.setOnAction(event -> {
-                    //if (aparecioBateria) {
-                        //controladorBateria.recibirDato(button, mostrarCable, mostrarCables, busSuperior, pistaSuperior, busInferior, pistaInferior);
-                    //}
-
-                    //si no hay ningun aparato conectado, se dibuja con otro boton de la protoboard
                     onButtonClicked(button, tipo);
                 });
 
@@ -153,7 +123,13 @@ public class ControladorProtoboard {
     // Método para manejar cuando se hace clic en un botón de la protoboard
     public void onButtonClicked(Button button, String tipo) {
         // Si no hay un botón de inicio configurado, configúralo
-        if (cableManager.getButtonStart() == null) {
+        if(VariablesGlobales.aparecioBateria == true) {
+            cableManager.setButtonStart(VariablesGlobales.botonPresionadoBateria);
+            VariablesGlobales.aparecioBateria = false;
+            VariablesGlobales.botonPresionadoBateria = null;
+            System.out.println("Boton presionado bateria");
+
+        }else if (cableManager.getButtonStart() == null) {
             cableManager.setButtonStart(button);
         }else {
             // Si ya hay un botón de inicio, configúralo como final y dibuja el cable

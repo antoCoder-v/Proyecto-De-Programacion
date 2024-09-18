@@ -28,8 +28,6 @@ public class ControladorPantallaPrincipal {
     @FXML
     private AnchorPane pantallaPrincipal;
 
-    //variable para controlar si aparecio la bateria
-    private boolean aparecioBateria = false;
 
     private Button botonPresionado;
 
@@ -62,20 +60,16 @@ public class ControladorPantallaPrincipal {
 
     @FXML
     public void initialize() {
+
         // Inicializar la variable estática
         VariablesGlobales.pantallaPrincipal = pantallaPrincipal;
 
-        // Verifica si pantallaPrincipal es null
-        if (pantallaPrincipal == null) {
-            System.err.println("pantallaPrincipal es null en initialize");
-        } else {
-            System.out.println("pantallaPrincipal no es null en initialize");
-        }
     }
 
     @FXML
     private void botonAgregaBateria(ActionEvent event) {
         try {
+
             //Cargamos el fxml manual, para que no se pierdan los datos
             FXMLLoader loader = new FXMLLoader(getClass().getResource("bateria.fxml"));
             Parent root = loader.load();
@@ -83,13 +77,13 @@ public class ControladorPantallaPrincipal {
             root.setLayoutY(53);
 
             // Obtén el controlador de la batería
-            ControladorBateria controladorBateria = loader.getController();
+            //ControladorBateria controladorBateria = loader.getController();
 
             // Establece la referencia en ControladorPantallaPrincipal
-            this.setControladorBateria(controladorBateria);
+            //this.setControladorBateria(controladorBateria);
             pantallaPrincipal.getChildren().add(root);
 
-            aparecioBateria = true;
+            //aparecioBateria = true;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -109,6 +103,7 @@ public class ControladorPantallaPrincipal {
     @FXML
     private void agregarProtoboard(ActionEvent event) {
         try {
+
             // Cargamos el fxml manual, para que no se pierdan los datos
             FXMLLoader loader = new FXMLLoader(getClass().getResource("protoboard.fxml"));
             Parent root = loader.load();

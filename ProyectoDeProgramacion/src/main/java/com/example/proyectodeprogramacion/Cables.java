@@ -25,8 +25,8 @@ public class Cables {
         // Constructor vacío
     }
 
-    public Cables(AnchorPane pane, GridPane busSuperior, GridPane pistaSuperior, GridPane busInferior, GridPane pistaInferior) {
-        this.pane = pane;
+    public Cables(GridPane busSuperior, GridPane pistaSuperior, GridPane busInferior, GridPane pistaInferior) {
+        pane = VariablesGlobales.pantallaPrincipal;
 
         //recibimos los grindpane para el manejo correcto de las corrientes
         if (busSuperior == null || pistaSuperior == null || busInferior == null || pistaInferior == null) {
