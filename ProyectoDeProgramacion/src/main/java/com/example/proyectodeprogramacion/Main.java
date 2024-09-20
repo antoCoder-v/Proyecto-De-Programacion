@@ -1,5 +1,4 @@
 package com.example.proyectodeprogramacion;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +11,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             // Cargar el archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyectodeprogramacion/protoboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyectodeprogramacion/PantallaPrincipal.fxml"));
             Parent root = loader.load();
 
             // Configurar la escena y el escenario
