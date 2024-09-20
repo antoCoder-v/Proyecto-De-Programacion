@@ -8,4 +8,6 @@ public class VariablesGlobales {
     public static Boolean aparecioBateria;
     public static Button botonPresionadoBateria;
     public static ControladorProtoboard controladorProtoboard;
+    public static Boolean corrienteSwitch = false, corrienteLed = false;
+    public static ControladorLed elementoLed;
 }

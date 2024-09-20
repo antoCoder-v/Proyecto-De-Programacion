@@ -34,6 +34,7 @@ public class ControladorSwitch {
 
     private double offsetX,offsetY;
     private ControladorProtoboard protoboard;
+    private boolean pasoCorrienteSwitch = false;
 
 
     public ControladorSwitch() {
@@ -42,7 +43,7 @@ public class ControladorSwitch {
     @FXML
     public void initialize() {
         protoboard = VariablesGlobales.controladorProtoboard;
-
+        //VariablesGlobales.controladorSwitch = this;
         // Configura los eventos de arrastre para el switchPane
         switchPane.setOnMousePressed(this::handleMousePressed);
         switchPane.setOnMouseDragged(this::handleMouseDragged);
@@ -67,10 +68,6 @@ public class ControladorSwitch {
         encender.setOnAction(event -> verificarPosicion(protoboard));
     }
 
-    public void setProtoboard(ControladorProtoboard protoboard) {
-        this.protoboard = protoboard;
-    }
-
     private void handleMousePressed(MouseEvent event) {
         offsetX = event.getSceneX() - switchPane.getLayoutX();
         offsetY = event.getSceneY() - switchPane.getLayoutY();
@@ -81,42 +78,11 @@ public class ControladorSwitch {
         switchPane.setLayoutY(event.getSceneY() - offsetY);
     }
 
-    // Método para verificar sobre qué botones ha quedado el switch
-    /*public void verificarPosicion(ControladorProtoboard protoboard) {
-        if (protoboard == null) {
-            System.out.println("Protoboard no está asignado.");
-            return;
-        }
-
-        double switchX = switchPane.getLayoutX();
-        double switchY = switchPane.getLayoutY();
-
-        verificarEnGridPane(protoboard.getBusSuperior(), switchX, switchY);
-        verificarEnGridPane(protoboard.getPistaSuperior(), switchX, switchY);
-        verificarEnGridPane(protoboard.getBusInferior(), switchX, switchY);
-        verificarEnGridPane(protoboard.getPistaInferior(), switchX, switchY);
-    }
-
-    // Método auxiliar para iterar sobre los botones de un GridPane
-    private void verificarEnGridPane(GridPane gridPane, double switchX, double switchY) {
-        for (Node node : gridPane.getChildren()) {
-            if (node instanceof Button) {
-                Button button = (Button) node;
-
-                // Obtener los límites en escena de ambos elementos para una comparación precisa
-                Bounds buttonBounds = button.localToScene(button.getBoundsInLocal());
-                Bounds switchBounds = switchPane.localToScene(switchPane.getBoundsInLocal());
-
-                // Verifica si los límites del switch intersectan con los límites del botón
-                if (switchBounds.intersects(buttonBounds)) {
-                    System.out.println("Switch sobre: " + button.getId());
-                    System.out.println("----------------------------------");
-                }
-            }
-        }
-    }*/
     // Método para verificar si el switch está correctamente colocado sobre 4 botones
     public void verificarPosicion(ControladorProtoboard protoboard) {
+        pasoCorrienteSwitch = false;
+        VariablesGlobales.corrienteSwitch = pasoCorrienteSwitch;
+        System.out.println("Valor de pasoCorrienteSwitch: " + pasoCorrienteSwitch); // Verificar cambio
         if (protoboard == null) {
             System.out.println("Protoboard no está asignado.");
             return;
@@ -134,8 +100,10 @@ public class ControladorSwitch {
         verificarEnGridPane(protoboard.getPistaInferior(), switchX, switchY, botonesDebajoSwitch);
 
         if (botonesDebajoSwitch.size() == 4) {
-            System.out.println("Switch correctamente colocado sobre 4 botones.");
+            mostrarVentanaMensaje("El SWITCH fue conectado correctamente","Conexiòn");
+            //System.out.println("Switch correctamente colocado sobre 4 botones.");
             verificarCorriente(botonesDebajoSwitch); // Verificar corriente automáticamente
+            //System.out.println("Valor de pasoCorrienteSwitch en verificarPosicion: " + pasoCorrienteSwitch); // Verificar cambio
         } else {
             mostrarError("El switch debe estar sobre 4 botones.");
         }
@@ -176,6 +144,8 @@ public class ControladorSwitch {
 
         if (tieneCorrientePositiva && tieneCorrienteNegativa) {
             System.out.println("El switch está recibiendo corriente correctamente.");
+            pasoCorrienteSwitch = true;
+            VariablesGlobales.corrienteSwitch = pasoCorrienteSwitch;
         } else {
             mostrarError("El switch no está recibiendo corriente correctamente.");
         }
@@ -188,4 +158,12 @@ public class ControladorSwitch {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+    private void mostrarVentanaMensaje(String message, String title) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 }

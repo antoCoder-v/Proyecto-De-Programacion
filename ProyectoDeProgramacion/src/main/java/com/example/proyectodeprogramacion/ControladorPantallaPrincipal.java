@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 public class ControladorPantallaPrincipal {
 
     @FXML
-    private Button mostrarLed,mostrarSwitch,agregarProtoboard,botonAgregaBateria;
+    private Button mostrarLed,mostrarSwitch,agregarProtoboard,botonAgregaBateria,verCircuito;
     @FXML
     private AnchorPane pantallaPrincipal;
 
@@ -25,6 +25,7 @@ public class ControladorPantallaPrincipal {
         mostrarLed.setOnAction(event -> cargarInterfacezElementos("led.fxml"));
         mostrarSwitch.setOnAction(event -> cargarInterfacezElementos("switch.fxml"));
         agregarProtoboard.setOnAction(event -> cargarInterfacezElementos("protoboard.fxml"));
+        verCircuito.setOnAction(actionEvent -> verConexion());
 
     }
 
@@ -43,5 +44,7 @@ public class ControladorPantallaPrincipal {
 
         }
     }
-
+    private void verConexion(){
+        VariablesGlobales.controladorProtoboard.verificarCircuitoCerrado();
+    }
 }

@@ -9,8 +9,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.AudioClip;
 
-import java.net.URL;
-
 
 public class ControladorProtoboard {
 
@@ -22,9 +20,10 @@ public class ControladorProtoboard {
     private AnchorPane PantallaProtoboard;
     //Clases externas
     private Cables cableManager;
+    private ControladorSwitch elementoSwitch;
+    private ControladorLed elementoLed;
 
-    //variables para almacenar la posición del mouse
-    private double offsetX,offsetY;
+    private double offsetX,offsetY; //variables para almacenar la posición del mouse
 
     public GridPane getBusSuperior() {
         return busSuperior;
@@ -45,6 +44,8 @@ public class ControladorProtoboard {
     @FXML
     public void initialize() {
         VariablesGlobales.controladorProtoboard = this;
+        //elementoLed = new ControladorLed();
+        //elementoSwitch = VariablesGlobales.controladorSwitch;
         // Agregar botones a busSuperior
         agregarBotonesGridPane(busSuperior, "busSuperior");
 
@@ -106,7 +107,7 @@ public class ControladorProtoboard {
         }
 
         // Si no hay un botón de inicio configurado, configúralo
-        if (VariablesGlobales.aparecioBateria == true) {
+        if (VariablesGlobales.aparecioBateria) {
             cableManager.setButtonStart(VariablesGlobales.botonPresionadoBateria);
             cableManager.setButtonEndAndDrawCable(button);
             VariablesGlobales.aparecioBateria = false;
@@ -117,6 +118,7 @@ public class ControladorProtoboard {
             // Si ya hay un botón de inicio, configúralo como final y dibuja el cable
             cableManager.setButtonEndAndDrawCable(button);
         }
+        //verificarCircuitoCerrado();
     }
 
     private void handleMousePressed(MouseEvent event) {
@@ -127,6 +129,22 @@ public class ControladorProtoboard {
     private void handleMouseDragged(MouseEvent event) {
         PantallaProtoboard.setLayoutX(event.getSceneX() - offsetX);
         PantallaProtoboard.setLayoutY(event.getSceneY() - offsetY);
+    }
+
+    // Método para verificar si el circuito está cerrado
+    public void verificarCircuitoCerrado() {
+        System.out.println("Corriente led es: "+VariablesGlobales.corrienteLed);
+        System.out.println("Corriente Switch es: "+VariablesGlobales.corrienteSwitch);
+        if (VariablesGlobales.corrienteSwitch && VariablesGlobales.corrienteLed) {
+            System.out.println("El circuito está cerrado correctamente.");
+            //aqui cambiar color
+            VariablesGlobales.elementoLed.cambiarColor("yellow");
+            mostrarVentanaMensaje("El CIRCUITO fue correctamente conectado","Circuito cerrado");
+        } else if (VariablesGlobales.corrienteSwitch && !VariablesGlobales.corrienteLed) {
+            mostrarVentanaMensaje("SWITCH recibe corriente pero LED NO esta recibiendo corriente","ERROR");
+        }else if (VariablesGlobales.corrienteLed && !VariablesGlobales.corrienteSwitch) {
+            mostrarVentanaMensaje("LED recibe corriente pero SWITCH NO esta recibiendo corriente","ERROR");
+        }
     }
 
     // Método para mostrar una ventana de mensaje

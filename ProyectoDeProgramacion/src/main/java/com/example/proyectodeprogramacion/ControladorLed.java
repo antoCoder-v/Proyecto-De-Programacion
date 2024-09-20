@@ -11,21 +11,26 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.shape.Rectangle;
 
 public class ControladorLed {
 
     @FXML
-    private Circle patita1,patita2;  // Vinculado con fx:id="patita1"
+    private Circle patita1,patita2,luzCirculo;  // Vinculado con fx:id="patita1"
+    @FXML
+    private Rectangle luzRectangulo;
     @FXML
     private AnchorPane ledPane;    // Contenedor del LED y las patitas
     private double offsetX,offsetY;
     private boolean conectadoProtoboard = false;
+    public boolean pasoCorrienteLed = false;
     private ControladorProtoboard protoboard;
 
     // Inicialización del controlador
     @FXML
     public void initialize() {
         protoboard = VariablesGlobales.controladorProtoboard;
+        VariablesGlobales.elementoLed = this;
 
         // Inicialización de las patitas (puedes personalizar los estilos o comportamientos)
         patita1.setFill(javafx.scene.paint.Color.DODGERBLUE);
@@ -57,6 +62,11 @@ public class ControladorLed {
 
     }
 
+    public void cambiarColor(String color) {
+        luzCirculo.setFill(Color.web(color)); // Cambia el color del círculo
+        luzRectangulo.setFill(Color.web(color));
+    }
+
     // Método para capturar el punto inicial de arrastre
     private void onMousePressed(MouseEvent event) {
         offsetX = event.getSceneX() - ledPane.getLayoutX();
@@ -84,11 +94,14 @@ public class ControladorLed {
         } else if (patita.equals("patita2")) {
             patita2.setFill(Color.GREEN);
         }
+        verificarCorrienteLED(protoboard);
     }
 
     // Método para desconectar una patita de la protoboard
     private void desconectarDeProtoboard(String patita) {
         conectadoProtoboard = false;
+        pasoCorrienteLed = false;
+        VariablesGlobales.corrienteLed = pasoCorrienteLed;
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Desconexión");
         alert.setHeaderText(null);
@@ -141,4 +154,73 @@ public class ControladorLed {
             }
         }
     }
+
+    // Método para verificar si el LED está correctamente colocado y recibiendo corriente
+    public void verificarCorrienteLED(ControladorProtoboard protoboard) {
+        if (protoboard == null) {
+            System.out.println("Protoboard no está asignado.");
+            return;
+        }
+
+        // Obtener la posición de las patitas del LED
+        Bounds patita1Bounds = patita1.localToScene(patita1.getBoundsInLocal());
+        Bounds patita2Bounds = patita2.localToScene(patita2.getBoundsInLocal());
+
+        // Inicializar las variables que controlan si hay corriente positiva y negativa
+        boolean corrientePositiva = false;
+        boolean corrienteNegativa = false;
+
+        // Verificar la corriente en cada parte de la protoboard
+        corrientePositiva = verificarCorrienteEnGridPane(protoboard.getBusSuperior(), patita2Bounds, "green") || corrientePositiva;
+        corrienteNegativa = verificarCorrienteEnGridPane(protoboard.getBusSuperior(), patita1Bounds, "red") || corrienteNegativa;
+
+        corrientePositiva = verificarCorrienteEnGridPane(protoboard.getPistaSuperior(), patita2Bounds, "green") || corrientePositiva;
+        corrienteNegativa = verificarCorrienteEnGridPane(protoboard.getPistaSuperior(), patita1Bounds, "red") || corrienteNegativa;
+
+        corrientePositiva = verificarCorrienteEnGridPane(protoboard.getBusInferior(), patita2Bounds, "green") || corrientePositiva;
+        corrienteNegativa = verificarCorrienteEnGridPane(protoboard.getBusInferior(), patita1Bounds, "red") || corrienteNegativa;
+
+        corrientePositiva = verificarCorrienteEnGridPane(protoboard.getPistaInferior(), patita2Bounds, "green") || corrientePositiva;
+        corrienteNegativa = verificarCorrienteEnGridPane(protoboard.getPistaInferior(), patita1Bounds, "red") || corrienteNegativa;
+
+        // Verificar si ambas patitas reciben corriente adecuada
+        if (corrientePositiva && corrienteNegativa) {
+            System.out.println("El LED está recibiendo corriente correctamente.");
+            pasoCorrienteLed = true;
+            VariablesGlobales.corrienteLed = pasoCorrienteLed;
+        } else {
+            mostrarError("El LED no está recibiendo corriente correctamente.");
+        }
+    }
+
+    // Método auxiliar para verificar si un botón en un GridPane tiene la corriente deseada
+    private boolean verificarCorrienteEnGridPane(GridPane gridPane, Bounds patitaBounds, String colorCorriente) {
+        for (Node node : gridPane.getChildren()) {
+            if (node instanceof Button) {
+                Button button = (Button) node;
+
+                // Obtener los límites del botón
+                Bounds buttonBounds = button.localToScene(button.getBoundsInLocal());
+
+                // Verificar si la patita está sobre este botón
+                if (patitaBounds.intersects(buttonBounds)) {
+                    if (button.getStyle().contains(colorCorriente)) {
+                        return true; // Se ha encontrado la corriente correcta
+                    }
+                }
+            }
+        }
+        return false; // No se ha encontrado la corriente deseada en este GridPane
+    }
+
+
+    // Método para mostrar un mensaje de error
+    private void mostrarError(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
 }
