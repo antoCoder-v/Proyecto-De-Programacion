@@ -46,6 +46,7 @@ public class ControladorSwitch {
     @FXML
     public void initialize() {
 
+        // Habilitar eliminación con clic derecho para la protoboard
         EliminarElementos.habilitarEliminacion(switchPane);
 
         // Configura los eventos de arrastre para el switchPane
