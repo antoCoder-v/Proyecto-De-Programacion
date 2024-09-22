@@ -62,6 +62,9 @@ public class ControladorProtoboard {
 
     @FXML
     public void initialize() {
+
+        EliminarElementos.habilitarEliminacion(PantallaProtoboard);
+
         //pantallaPrincipal.setProtoboard(this);
         
         // Agregar botones a busSuperior

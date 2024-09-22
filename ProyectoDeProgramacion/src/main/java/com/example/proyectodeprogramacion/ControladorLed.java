@@ -27,6 +27,9 @@ public class ControladorLed {
     // Inicialización del controlador
     @FXML
     public void initialize() {
+
+        EliminarElementos.habilitarEliminacion(ledPane);
+
         // Inicialización de las patitas (puedes personalizar los estilos o comportamientos)
         patita1.setFill(javafx.scene.paint.Color.DODGERBLUE);
         patita2.setFill(javafx.scene.paint.Color.DODGERBLUE);

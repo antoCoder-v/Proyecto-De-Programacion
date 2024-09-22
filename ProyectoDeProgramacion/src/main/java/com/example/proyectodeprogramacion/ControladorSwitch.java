@@ -45,6 +45,9 @@ public class ControladorSwitch {
 
     @FXML
     public void initialize() {
+
+        EliminarElementos.habilitarEliminacion(switchPane);
+
         // Configura los eventos de arrastre para el switchPane
         switchPane.setOnMousePressed(this::handleMousePressed);
         switchPane.setOnMouseDragged(this::handleMouseDragged);
